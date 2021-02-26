@@ -55,7 +55,7 @@ const DestinationSearch = (props) => {
           }}
           fetchDetails
           query={{
-            key: 'AIzaSyB7LdQYl6JPmA0l9I7A1ovDOFnmD1a8-To',
+            key: 'AIzaSyAAeM8IdUBx3nOCxMqgkVPkNVe4C2H91Mo',
             language: 'en',
           }}
           renderRow={(data) => <PlaceRow data={data} />}
@@ -80,7 +80,7 @@ const DestinationSearch = (props) => {
           }}
           fetchDetails
           query={{
-            key: 'AIzaSyB7LdQYl6JPmA0l9I7A1ovDOFnmD1a8-To',
+            key: 'AIzaSyAAeM8IdUBx3nOCxMqgkVPkNVe4C2H91Mo',
             language: 'en',
           }}
           renderRow={(data) => <PlaceRow data={data} />}
