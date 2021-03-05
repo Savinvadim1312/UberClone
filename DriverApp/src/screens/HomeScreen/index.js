@@ -9,7 +9,7 @@ import NewOrderPopup from "../../components/NewOrderPopup";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 import { Auth, API, graphqlOperation } from 'aws-amplify';
-import { getCar } from '../../graphql/queries';
+import { getCar, listOrders } from '../../graphql/queries';
 import { updateCar } from '../../graphql/mutations';
 
 const origin = {latitude: 28.450927, longitude: -16.260845};
@@ -20,21 +20,7 @@ const HomeScreen = () => {
   const [car, setCar] = useState(null);
   const [myPosition, setMyPosition] = useState(null);
   const [order, setOrder] = useState(null)
-  const [newOrder, setNewOrder] = useState({
-    id: '1',
-    type: 'UberX',
-
-    originLatitude: 28.453327,
-    oreiginLongitude: -16.263045,
-
-    destLatitude: 28.452927,
-    destLongitude: -16.260845,
-
-    user: {
-      rating: 4.8,
-      name: 'Ciara',
-    }
-  });
+  const [newOrders, setNewOrders] = useState([]);
 
   const fetchCar = async () => {
     try {
@@ -48,17 +34,33 @@ const HomeScreen = () => {
     }
   }
 
+  const fetchOrders = async () => {
+    try {
+        const ordersData = await API.graphql(
+          graphqlOperation(
+            listOrders,
+            // { filter: { status: { eq: 'NEW'}}}
+            )
+        );
+        console.log(ordersData);
+        setNewOrders(ordersData.data.listOrders.items);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     fetchCar();
+    fetchOrders();
   }, []);
 
   const onDecline = () => {
-    setNewOrder(null);
+    setNewOrders(newOrders.slice(1));
   }
 
   const onAccept = (newOrder) => {
     setOrder(newOrder);
-    setNewOrder(null);
+    setNewOrders(newOrders.slice(1));
   }
 
   const onGoPress = async () => {
@@ -232,12 +234,12 @@ const HomeScreen = () => {
         <Entypo name={"menu"} size={30} color="#4a4a4a" />
       </View>
 
-      {newOrder && <NewOrderPopup
-        newOrder={newOrder}
+      {newOrders.length > 0 && !order && <NewOrderPopup
+        newOrder={newOrders[0]}
         duration={2}
         distance={0.5}
         onDecline={onDecline}
-        onAccept={() => onAccept(newOrder)}
+        onAccept={() => onAccept(newOrders[0])}
       />}
     </View>
   );
