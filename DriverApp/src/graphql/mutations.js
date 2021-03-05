@@ -16,3 +16,22 @@ export const createCar = /* GraphQL */ `
     }
   }
 `;
+
+export const updateCar = /* GraphQL */ `
+  mutation UpdateCar(
+    $input: UpdateCarInput!
+    $condition: ModelCarConditionInput
+  ) {
+    updateCar(input: $input, condition: $condition) {
+      id
+      type
+      latitude
+      longitude
+      heading
+      isActive
+      userId
+      createdAt
+      updatedAt
+    }
+  }
+`;

@@ -8,12 +8,16 @@ import styles from './styles.js'
 import NewOrderPopup from "../../components/NewOrderPopup";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
+import { Auth, API, graphqlOperation } from 'aws-amplify';
+import { getCar } from '../../graphql/queries';
+import { updateCar } from '../../graphql/mutations';
+
 const origin = {latitude: 28.450927, longitude: -16.260845};
 const destination = {latitude: 37.771707, longitude: -122.4053769};
 const GOOGLE_MAPS_APIKEY = 'AIzaSyDFhFUaYpyAjNE4Eq-sWCGWjrr6kyGnhbQ';
 
 const HomeScreen = () => {
-  const [isOnline, setIsOnline] = useState(false);
+  const [car, setCar] = useState(null);
   const [myPosition, setMyPosition] = useState(null);
   const [order, setOrder] = useState(null)
   const [newOrder, setNewOrder] = useState({
@@ -30,7 +34,23 @@ const HomeScreen = () => {
       rating: 4.8,
       name: 'Ciara',
     }
-  })
+  });
+
+  const fetchCar = async () => {
+    try {
+      const userData = await Auth.currentAuthenticatedUser();
+      const carData = await API.graphql(
+        graphqlOperation(getCar, { id: userData.attributes.sub }),
+      );
+      setCar(carData.data.getCar);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  useEffect(() => {
+    fetchCar();
+  }, []);
 
   const onDecline = () => {
     setNewOrder(null);
@@ -41,8 +61,22 @@ const HomeScreen = () => {
     setNewOrder(null);
   }
 
-  const onGoPress = () => {
-    setIsOnline(!isOnline);
+  const onGoPress = async () => {
+    // Update the car and set it to active
+    try {
+      const userData = await Auth.currentAuthenticatedUser();
+      const input = {
+        id: userData.attributes.sub,
+        isActive: !car.isActive,
+      }
+      const updatedCarData = await API.graphql(
+        graphqlOperation(updateCar, { input })
+      )
+      console.log(updatedCarData.data.updateCar)
+      setCar(updatedCarData.data.updateCar);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   const onUserLocationChange = (event) => {
@@ -116,7 +150,7 @@ const HomeScreen = () => {
         </View>
       )
     }
-    if (isOnline) {
+    if (car?.isActive) {
       return (
         <Text style={styles.bottomText}>You're online</Text>
       )
@@ -188,7 +222,7 @@ const HomeScreen = () => {
         onPress={onGoPress}
         style={styles.goButton}>
         <Text style={styles.goText}>
-          {isOnline ? 'END' : 'GO'}
+          {car?.isActive ? 'END' : 'GO'}
         </Text>
       </Pressable>
 
