@@ -10,6 +10,14 @@
 			"StackName": "amplify-uberclone-dev-151717",
 			"StackId": "arn:aws:cloudformation:eu-west-1:704219588443:stack/amplify-uberclone-dev-151717/67cc5ef0-6d45-11eb-a0f5-0ad624c96ae7",
 			"AmplifyAppId": "d3b6woyxblivhg"
+		},
+		"categories": {
+			"function": {
+				"uberclone140983fe140983fePostConfirmation": {}
+			},
+			"auth": {
+				"uberclone140983fe140983fe": {}
+			}
 		}
 	},
 	"function": {
@@ -17,21 +25,17 @@
 			"build": true,
 			"providerPlugin": "awscloudformation",
 			"service": "Lambda",
-			"lastBuildTimeStamp": "2021-02-12T16:19:14.580Z",
-			"lastPackageTimeStamp": "2021-02-12T16:19:14.825Z",
-			"distZipFilename": "uberclone140983fe140983fePostConfirmation-355546455170736a3543-build.zip",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-uberclone-dev-151717-deployment/amplify-cfn-templates/function/uberclone140983fe140983fePostConfirmation-cloudformation-template.json",
-				"logicalId": "functionuberclone140983fe140983fePostConfirmation"
-			},
-			"lastPushTimeStamp": "2021-02-12T17:25:21.930Z",
 			"output": {
 				"Region": "eu-west-1",
 				"Arn": "arn:aws:lambda:eu-west-1:704219588443:function:uberclone140983fe140983fePostConfirmation-dev",
 				"Name": "uberclone140983fe140983fePostConfirmation-dev",
 				"LambdaExecutionRole": "uberclone140983fe140983fePostConfirmation-dev"
 			},
-			"lastPushDirHash": "jdT7wuuIpaEdN4ttZ7rOF7I1kXQ="
+			"lastPushTimeStamp": "2021-03-05T15:52:42.691Z",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-uberclone-dev-151717-deployment/amplify-cfn-templates/function/uberclone140983fe140983fePostConfirmation-cloudformation-template.json",
+				"logicalId": "functionuberclone140983fe140983fePostConfirmation"
+			}
 		}
 	},
 	"auth": {
@@ -49,11 +53,6 @@
 					]
 				}
 			],
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-uberclone-dev-151717-deployment/amplify-cfn-templates/auth/uberclone140983fe140983fe-cloudformation-template.yml",
-				"logicalId": "authuberclone140983fe140983fe"
-			},
-			"lastPushTimeStamp": "2021-02-12T17:25:21.931Z",
 			"output": {
 				"AppClientSecret": "1tumvve4h6bs5073lb6eoo05ie3495bn4n7kttm787r5l0o7uat4",
 				"UserPoolId": "eu-west-1_Q0ukyAmCD",
@@ -63,7 +62,11 @@
 				"IdentityPoolName": "uberclone140983fe_identitypool_140983fe__dev",
 				"UserPoolName": "uberclone140983fe_userpool_140983fe"
 			},
-			"lastPushDirHash": "B1jwmVoCGTiHFX94PqWlFH8RCNI="
+			"lastPushTimeStamp": "2021-03-05T15:52:42.693Z",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-uberclone-dev-151717-deployment/amplify-cfn-templates/auth/uberclone140983fe140983fe-cloudformation-template.yml",
+				"logicalId": "authuberclone140983fe140983fe"
+			}
 		}
 	},
 	"api": {
@@ -83,12 +86,12 @@
 				"GraphQLAPIIdOutput": "iqlgcumwvzawnegya5rlotrhzq",
 				"GraphQLAPIEndpointOutput": "https://pagm5rr44fa5bdvx4y5duk7vjq.appsync-api.eu-west-1.amazonaws.com/graphql"
 			},
+			"lastPushTimeStamp": "2021-03-05T15:52:45.243Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-uberclone-dev-151717-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiuberclone"
 			},
-			"lastPushTimeStamp": "2021-02-12T17:25:25.195Z",
-			"lastPushDirHash": "OMZDA9Si6zAH/b0zFKOERT0eZSs="
+			"lastPushDirHash": "wn04tFOZjAyTWD0/523Ksxq3F6U="
 		}
 	}
 }

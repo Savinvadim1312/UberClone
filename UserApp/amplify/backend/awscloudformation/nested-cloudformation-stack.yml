@@ -163,7 +163,7 @@
 						]
 					},
 					"S3DeploymentBucket": "amplify-uberclone-dev-151717-deployment",
-					"S3DeploymentRootKey": "amplify-appsync-files/d2de157792f89ec413d4b59368a55a685cfc2de5",
+					"S3DeploymentRootKey": "amplify-appsync-files/e7d505eca31d09e97971caa1b23f335f39970ffb",
 					"env": "dev"
 				}
 			}
