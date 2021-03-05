@@ -42,7 +42,6 @@ const HomeScreen = () => {
             // { filter: { status: { eq: 'NEW'}}}
             )
         );
-        console.log(ordersData);
         setNewOrders(ordersData.data.listOrders.items);
     } catch (e) {
       console.log(e);
@@ -74,15 +73,30 @@ const HomeScreen = () => {
       const updatedCarData = await API.graphql(
         graphqlOperation(updateCar, { input })
       )
-      console.log(updatedCarData.data.updateCar)
       setCar(updatedCarData.data.updateCar);
     } catch (e) {
       console.error(e);
     }
   }
 
-  const onUserLocationChange = (event) => {
-    setMyPosition(event.nativeEvent.coordinate);
+  const onUserLocationChange = async (event) => {
+    const { latitude, longitude, heading } = event.nativeEvent.coordinate
+    // Update the car and set it to active
+    try {
+      const userData = await Auth.currentAuthenticatedUser();
+      const input = {
+        id: userData.attributes.sub,
+        latitude,
+        longitude,
+        heading,
+      }
+      const updatedCarData = await API.graphql(
+        graphqlOperation(updateCar, { input })
+      )
+      setCar(updatedCarData.data.updateCar);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   const onDirectionFound = (event) => {
@@ -118,7 +132,7 @@ const HomeScreen = () => {
           <View style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'center', backgroundColor: '#cb1a1a', width: 200, padding: 10,  }}>
             <Text style={{color: 'white', fontWeight: 'bold'}}>COMPLETE {order.type}</Text>
           </View>
-          <Text style={styles.bottomText}>{order.user.name}</Text>
+          <Text style={styles.bottomText}>{order.user.username}</Text>
         </View>
       )
     }
@@ -133,7 +147,7 @@ const HomeScreen = () => {
             </View>
             <Text>{order.distance ? order.distance.toFixed(1) : '?'} km</Text>
           </View>
-          <Text style={styles.bottomText}>Dropping off {order.user.name}</Text>
+          <Text style={styles.bottomText}>Dropping off {order.user.username}</Text>
         </View>
       )
     }
@@ -148,7 +162,7 @@ const HomeScreen = () => {
             </View>
             <Text>{order.distance ? order.distance.toFixed(1) : '?'} km</Text>
           </View>
-          <Text style={styles.bottomText}>Picking up {order.user.name}</Text>
+          <Text style={styles.bottomText}>Picking up {order.user.username}</Text>
         </View>
       )
     }
@@ -176,7 +190,10 @@ const HomeScreen = () => {
       >
         {order && (
           <MapViewDirections
-            origin={myPosition}
+            origin={{
+              latitude: car?.latitude,
+              longitude: car?.longitude,
+            }}
             onReady={onDirectionFound}
             destination={getDestination()}
             apikey={GOOGLE_MAPS_APIKEY}
