@@ -10,7 +10,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const origin = {latitude: 28.450927, longitude: -16.260845};
 const destination = {latitude: 37.771707, longitude: -122.4053769};
-const GOOGLE_MAPS_APIKEY = 'AIzaSyAAeM8IdUBx3nOCxMqgkVPkNVe4C2H91Mo';
+const GOOGLE_MAPS_APIKEY = 'AIzaSyDFhFUaYpyAjNE4Eq-sWCGWjrr6kyGnhbQ';
 
 const HomeScreen = () => {
   const [isOnline, setIsOnline] = useState(false);
