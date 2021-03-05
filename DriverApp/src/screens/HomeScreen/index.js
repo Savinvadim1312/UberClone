@@ -10,7 +10,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { getCar, listOrders } from '../../graphql/queries';
-import { updateCar } from '../../graphql/mutations';
+import { updateCar, updateOrder } from '../../graphql/mutations';
 
 const origin = {latitude: 28.450927, longitude: -16.260845};
 const destination = {latitude: 37.771707, longitude: -122.4053769};
@@ -39,7 +39,7 @@ const HomeScreen = () => {
         const ordersData = await API.graphql(
           graphqlOperation(
             listOrders,
-            // { filter: { status: { eq: 'NEW'}}}
+            { filter: { status: { eq: 'NEW'}}}
             )
         );
         setNewOrders(ordersData.data.listOrders.items);
@@ -57,8 +57,21 @@ const HomeScreen = () => {
     setNewOrders(newOrders.slice(1));
   }
 
-  const onAccept = (newOrder) => {
-    setOrder(newOrder);
+  const onAccept = async (newOrder) => {
+    try {
+      const input = {
+        id: newOrder.id,
+        status: "PICKING_UP_CLIENT",
+        carId: car.id
+      }
+      const orderData = await API.graphql(
+        graphqlOperation(updateOrder, { input })
+      )
+      setOrder(orderData.data.updateOrder);
+    } catch (e) {
+
+    }
+
     setNewOrders(newOrders.slice(1));
   }
 
@@ -147,7 +160,7 @@ const HomeScreen = () => {
             </View>
             <Text>{order.distance ? order.distance.toFixed(1) : '?'} km</Text>
           </View>
-          <Text style={styles.bottomText}>Dropping off {order.user.username}</Text>
+          <Text style={styles.bottomText}>Dropping off {order?.user?.username}</Text>
         </View>
       )
     }
@@ -162,7 +175,7 @@ const HomeScreen = () => {
             </View>
             <Text>{order.distance ? order.distance.toFixed(1) : '?'} km</Text>
           </View>
-          <Text style={styles.bottomText}>Picking up {order.user.username}</Text>
+          <Text style={styles.bottomText}>Picking up {order?.user?.username}</Text>
         </View>
       )
     }

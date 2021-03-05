@@ -43,3 +43,8 @@ type Order @model
   carId: ID!
   car: Car @connection(fields: ["carId"])
 }
+
+type Subscription {
+  onOrderUpdated(id: ID!): Order @aws_subscribe(mutations: ["updateOrder"])
+  onCarUpdated(id: ID!): Car @aws_subscribe(mutations: ["updateCar"])
+}

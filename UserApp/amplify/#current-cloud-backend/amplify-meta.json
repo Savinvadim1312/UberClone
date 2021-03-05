@@ -31,7 +31,7 @@
 				"Name": "uberclone140983fe140983fePostConfirmation-dev",
 				"LambdaExecutionRole": "uberclone140983fe140983fePostConfirmation-dev"
 			},
-			"lastPushTimeStamp": "2021-03-05T15:52:42.691Z",
+			"lastPushTimeStamp": "2021-03-05T17:43:53.758Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-uberclone-dev-151717-deployment/amplify-cfn-templates/function/uberclone140983fe140983fePostConfirmation-cloudformation-template.json",
 				"logicalId": "functionuberclone140983fe140983fePostConfirmation"
@@ -62,7 +62,7 @@
 				"IdentityPoolName": "uberclone140983fe_identitypool_140983fe__dev",
 				"UserPoolName": "uberclone140983fe_userpool_140983fe"
 			},
-			"lastPushTimeStamp": "2021-03-05T15:52:42.693Z",
+			"lastPushTimeStamp": "2021-03-05T17:43:53.761Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-uberclone-dev-151717-deployment/amplify-cfn-templates/auth/uberclone140983fe140983fe-cloudformation-template.yml",
 				"logicalId": "authuberclone140983fe140983fe"
@@ -86,12 +86,12 @@
 				"GraphQLAPIIdOutput": "iqlgcumwvzawnegya5rlotrhzq",
 				"GraphQLAPIEndpointOutput": "https://pagm5rr44fa5bdvx4y5duk7vjq.appsync-api.eu-west-1.amazonaws.com/graphql"
 			},
-			"lastPushTimeStamp": "2021-03-05T15:52:45.243Z",
+			"lastPushTimeStamp": "2021-03-05T17:43:55.864Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-uberclone-dev-151717-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiuberclone"
 			},
-			"lastPushDirHash": "wn04tFOZjAyTWD0/523Ksxq3F6U="
+			"lastPushDirHash": "w8WEH2zx6E4KUZlnBLlE2UvAWBA="
 		}
 	}
 }
